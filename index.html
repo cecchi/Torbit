@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" href="lib/rickshaw/rickshaw.min.css">
+    <link rel="stylesheet" href="css/dashboard.min.css">
+    <style>
+    </style>
+  </head>
+  <body>
+    <div class="block">
+      <div id="chart_container">
+        <div id="y-axis"></div>
+        <div id="chart"></div>
+        <div id="view-finder">
+          <div id="blur-left">
+            <div class="handle"></div>
+          </div>
+          <div id="blur-right">
+            <div class="handle"></div>
+          </div>
+          <div id="view-finder-chart"></div>
+        </div>
+      </div>
+      <div id="chart-footer">
+        <div id="legend"></div>
+        <div id="view-mode">
+          View Mode:
+          <select id="view-mode-select">
+            <option value="independent">Independent</option>
+            <option value="stacked">Stacked</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <br />
+
+    <div class="block">
+      <textarea id="input"></textarea>
+      <div id="input-footer">
+        <button id="submit">Submit</button>
+        <button id="random">Random Data</button>
+      </div>
+    </div>
+
+    <script src="lib/rickshaw/vendor/d3.min.js"></script> 
+    <script src="lib/rickshaw/vendor/d3.layout.min.js"></script> 
+    <script src="lib/rickshaw/rickshaw.min.js"></script> 
+
+    <script src="js/dashboard.min.js"></script>
+  </body>
+</html>
