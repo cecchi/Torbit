@@ -85,20 +85,21 @@ Dashboard.ViewFinder = (function(Rickshaw, window) {
       ViewFinder.preventHighlight(e);
       var left      = ViewFinder.dragging === Dashboard.Elements.viewFinderGrabLeft,
           other     = left ? Dashboard.Elements.viewFinderGrabRight : Dashboard.Elements.viewFinderGrabLeft,
-          timestamp = ViewFinder.getTimestampFromOffset(e.pageX),
-          domain    = Dashboard.Data.filterDomain(timestamp, ViewFinder.getTimestamp(other));
+          tsDrag    = ViewFinder.getTimestampFromOffset(e.pageX),
+          tsOther   = ViewFinder.getTimestamp(other),
+          domain    = Dashboard.Data.filterDomain(tsDrag, tsOther);
           count     = domain.reduce(function(last, current) {
                         return Math.min(last.data.length, current.data.length);
                       });
 
       // Do not allow zooming if there aren't enough data points to draw a graph
-      if(count > 2) {
+      if(count > 2 && (left ? (tsOther - tsDrag) : (tsDrag - tsOther)) >= 0) {
         var width     = Dashboard.Elements.viewFinder.clientWidth,
             offset    = ViewFinder.getOffset(),
             percent   = (e.pageX - offset.left) / width;
 
         ViewFinder.dragging.parentNode.style.width = (left ? percent : (1 - percent)) * width + 'px';
-        ViewFinder.dragging.setAttribute('data-timestamp', timestamp);
+        ViewFinder.dragging.setAttribute('data-timestamp', tsDrag);
 
         ViewFinder.updateChart();
       }
